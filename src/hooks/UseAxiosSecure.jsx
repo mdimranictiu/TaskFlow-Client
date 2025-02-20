@@ -6,7 +6,7 @@ import { AuthContext } from "../AuthContext/AuthProvider";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'https://product-planet-server.vercel.app/'
+    baseURL: 'http://localhost:5000/'
 })
 const UseAxiosSecure = () => {
     const navigate = useNavigate();

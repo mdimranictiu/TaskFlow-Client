@@ -32,7 +32,7 @@ const Register = () => {
               timer: 1500,
             });
             reset();
-            navigate("/");
+            navigate("/dashboard");
             console.log("login success")
           })
           .catch((error) => console.error(error));
@@ -44,7 +44,7 @@ const Register = () => {
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then(() => navigate("/"))
+      .then(() => navigate("/dashboard"))
       .catch((error) => {
         Swal.fire({ icon: "error", title: "Error", text: error.message });
       });
@@ -112,7 +112,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full py-2 text-white bg-[#0C65E3] rounded-lg hover:bg-white hover:text-[#0C65E3] border border-[#0C65E3] text-lg font-semibold transition-all duration-300"
+            className="w-full py-2 cursor-pointer text-white bg-[#0C65E3] rounded-lg hover:bg-white hover:text-[#0C65E3] border border-[#0C65E3] text-lg font-semibold transition-all duration-300"
           >
             Register
           </button>

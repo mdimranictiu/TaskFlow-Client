@@ -2,19 +2,37 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../Layout/Root";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Dashboard from "../Layout/Dashboard/Dashboard";
+import PrivateRoute from "../hooks/PrivateRoute";
+import AddTask from "../pages/AddTask";
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root></Root>,
-    children:[
-        {
-        path: "/",
-        element: <Login></Login>
-    },
-    {
-        path: '/register',
-        element: <Register></Register>
-    }
-]
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "dashboard",
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+        children: [
+          {
+            path: "my-tasks", 
+            element: <div>My Tasks</div>,
+          },
+          {
+            path: "add-task", 
+            element: <PrivateRoute><AddTask></AddTask></PrivateRoute>,
+          },
+        ],
+      },
+    ],
   },
 ]);
