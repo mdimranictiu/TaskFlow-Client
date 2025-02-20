@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import UseAxiosSecure from '../hooks/UseAxiosSecure';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../AuthContext/AuthProvider';
 
 const AddTask = () => {
+    const {user}=useContext(AuthContext)
   const {
     register,
     handleSubmit,
@@ -15,7 +17,13 @@ const AddTask = () => {
   const onSubmit = (data) => {
     const { title, description, category, dueDate } = data;
     
-    const taskData = { title, description, category, dueDate};
+    const taskData = {
+        title,
+        description,
+        category,
+        dueDate,
+        email: user?.email, 
+      };
 
     console.log("Task Data:", taskData);
      axiosSecure.post('/add-task',taskData)
@@ -43,7 +51,7 @@ const AddTask = () => {
   };
 
   return (
-    <div className="flex justify-center min-h-8/12 bg-gray-100">
+    <div className="flex justify-center min-h-screen bg-gray-100">
       <div className="shadow-2xl bg-white rounded-lg w-full max-w-5xl p-10">
         <h2 className="text-center py-5 text-3xl font-bold">Add A Task</h2>
         <div className="max-w-lg mx-auto">

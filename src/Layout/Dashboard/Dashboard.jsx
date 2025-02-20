@@ -6,14 +6,10 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { BsListTask } from "react-icons/bs";
 
-
-
-
-
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { user,logOut } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -31,44 +27,49 @@ const Dashboard = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [sidebarOpen, dropdownOpen]);
- const handleLogOut=()=>{
-    logOut()
- }
+
+  const handleLogOut = () => {
+    logOut();
+  };
+
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
       <div
-        className={`sidebar ${
+        className={`sidebar fixed md:relative md:translate-x-0 w-64 bg-gray-800 text-white h-screen p-5 transition-transform duration-300 z-50 flex flex-col ${
           sidebarOpen ? "translate-x-0" : "-translate-x-64"
-        } fixed md:relative md:translate-x-0 w-64 bg-gray-800 text-white h-full p-5 transition-transform duration-300 z-50 flex flex-col`}
+        }`}
       >
         <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
         <nav className="space-y-2 mt-12 flex-1">
           <Link
-            to="/dashboard/home"
+            to="/dashboard"
             className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
           >
-            <IoHomeOutline></IoHomeOutline>
+            <IoHomeOutline />
             Home
           </Link>
           <Link
             to="/dashboard/add-task"
             className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
           >
-            <FaCirclePlus></FaCirclePlus>
+            <FaCirclePlus />
             Add Task
           </Link>
           <Link
             to="/dashboard/my-tasks"
             className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
           >
-            <BsListTask></BsListTask>
+            <BsListTask />
             My Tasks
           </Link>
         </nav>
 
         {/* Logout Button at Bottom */}
-        <button onClick={handleLogOut}  className="absolute bottom-5 left-0 w-full bg-red-500 px-4 py-2 text-center text-white hover:bg-red-600">
+        <button
+          onClick={handleLogOut}
+          className="absolute bottom-5 left-0 w-full bg-red-500 px-4 py-2 text-center text-white hover:bg-red-600"
+        >
           Logout
         </button>
       </div>
@@ -76,7 +77,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Navbar */}
-        <div className="bg-[#1E2939] text-white shadow-md p-4 flex justify-between px-24 items-center relative">
+        <div className="bg-[#1E2939] text-white shadow-md p-4 flex justify-between px-24 items-center sticky top-0 z-40">
           {/* Sidebar Toggle Button (for mobile) */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -95,7 +96,7 @@ const Dashboard = () => {
             {/* Profile Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <img
-                src={user?.photoURL || "https://via.placeholder.com/150"} // Default image if no user photo
+                src={user?.photoURL || "https://via.placeholder.com/150"}
                 alt="Profile"
                 className="w-10 h-10 rounded-full cursor-pointer object-cover border-2 border-white"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -109,7 +110,10 @@ const Dashboard = () => {
                   <button className="w-full cursor-pointer px-4 py-2 mb-2 text-left text-gray-300 hover:bg-gray-700">
                     Profile
                   </button>
-                  <button onClick={handleLogOut} className="w-full cursor-pointer bg-red-500 mb-2 px-4 py-2 text-left text-white hover:bg-red-600">
+                  <button
+                    onClick={handleLogOut}
+                    className="w-full cursor-pointer bg-red-500 mb-2 px-4 py-2 text-left text-white hover:bg-red-600"
+                  >
                     Logout
                   </button>
                 </div>
@@ -118,8 +122,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Dashboard Content */}
-        <div className="flex-1 bg-gray-100 p-6">
+        {/* Dashboard Content (Scrollable) */}
+        <div className="flex-1 bg-gray-100 p-6 overflow-y-auto h-screen">
           <Outlet />
         </div>
       </div>
