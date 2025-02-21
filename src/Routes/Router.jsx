@@ -7,6 +7,7 @@ import PrivateRoute from "../hooks/PrivateRoute";
 import AddTask from "../pages/AddTask";
 import Home from "../pages/Home";
 import MyProfile from "../pages/MyProfile";
+import MyTasks from "../pages/MyTasks";
 
 export const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "my-tasks", 
-            element: <div>My Tasks</div>,
+            element: <MyTasks></MyTasks>,
           },
           {
             path: "add-task", 

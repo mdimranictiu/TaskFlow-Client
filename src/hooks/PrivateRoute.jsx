@@ -10,11 +10,19 @@ const PrivateRoute = ({ children }) => {
   // Show spinner while loading
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="w-full max-w-xl shadow-lg rounded-lg p-8">
-         <p>Loading....</p>
+      <>
+        <div className="flex items-center justify-center min-h-screen">
+          <span className="loading loading-ring loading-lg text-primary"></span>
+          <span className="loading loading-ring loading-lg text-secondary"></span>
+          <span className="loading loading-ring loading-lg text-accent"></span>
+          <span className="loading loading-ring loading-lg text-neutral"></span>
+          <span className="loading loading-ring loading-lg text-info"></span>
+          <span className="loading loading-ring loading-lg text-success"></span>
+          <span className="loading loading-ring loading-lg text-warning"></span>
+          <span className="loading loading-ring loading-lg text-error"></span>
         </div>
-      </div>
+      </>
+
     );
   }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UseAxiosSecure from '../hooks/UseAxiosSecure';
 import Swal from 'sweetalert2';
@@ -6,6 +6,7 @@ import { AuthContext } from '../AuthContext/AuthProvider';
 
 const AddTask = () => {
     const {user}=useContext(AuthContext)
+    const [loading,setLoading]=useState(false)
   const {
     register,
     handleSubmit,
@@ -15,6 +16,7 @@ const AddTask = () => {
   const axiosSecure=UseAxiosSecure()
 
   const onSubmit = (data) => {
+    setLoading(true)
     const { title, description, category, dueDate } = data;
     
     const taskData = {
@@ -28,6 +30,7 @@ const AddTask = () => {
     console.log("Task Data:", taskData);
      axiosSecure.post('/add-task',taskData)
      .then((res)=>{
+ 
         if(res.data.insertedId){
             Swal.fire({
                           position: "center",
@@ -38,6 +41,7 @@ const AddTask = () => {
                           timer: 1500,
                         });
         reset();
+        setLoading(false)
         }
      })
      .catch((error)=>{
@@ -46,6 +50,7 @@ const AddTask = () => {
             title: "Oops...",
             text: `${error.message}`,
           });
+          setLoading(false)
      })
     reset();
   };
@@ -123,7 +128,7 @@ const AddTask = () => {
                 type="submit"
                 className="w-full px-4 cursor-pointer py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg"
               >
-                Add Task
+                {loading? "Adding Task": "Add Task"}
               </button>
             </div>
           </form>

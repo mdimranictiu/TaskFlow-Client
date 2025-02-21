@@ -257,6 +257,7 @@ const Home = () => {
                             <h3 className="font-bold text-center text-lg">{task?.title}</h3>
                             <p className='font-bold '>Description: </p>
                             <p className='text-gray-500'>{task?.description}</p>
+                            <p className='font-bold text-blue-500'>Task Created: {task?.timestamp}</p>
                             <p className='font-bold text-red-500'>Due Time: {task?.dueDate}</p>
                         </div>
                     )}
