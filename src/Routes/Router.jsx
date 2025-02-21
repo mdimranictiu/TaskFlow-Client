@@ -8,6 +8,7 @@ import AddTask from "../pages/AddTask";
 import Home from "../pages/Home";
 import MyProfile from "../pages/MyProfile";
 import MyTasks from "../pages/MyTasks";
+import Logs from "../pages/Logs";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
           {
             path: 'my-profile',
             element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
+          },
+          {
+            path: 'my-activity',
+            element: <PrivateRoute><Logs></Logs></PrivateRoute>
           }
         ],
       },

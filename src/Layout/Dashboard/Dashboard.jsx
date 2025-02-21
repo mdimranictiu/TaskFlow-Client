@@ -63,6 +63,13 @@ const Dashboard = () => {
             <BsListTask />
             My Tasks
           </Link>
+          <Link
+            to="/dashboard/my-activity"
+            className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
+          >
+            <BsListTask />
+            My Activity
+          </Link>
         </nav>
 
         {/* Logout Button at Bottom */}
