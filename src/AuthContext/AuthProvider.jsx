@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 import UseAxiosPublic from "../hooks/useAxiosPublic";
 import { auth } from "../Firebase/Firebase.init";
-
+import { v4 as uuidv4 } from 'uuid'; 
 const provider = new GoogleAuthProvider();
 
 
@@ -42,7 +42,8 @@ const AuthProvider = ({children}) => {
         const unSubscribe= onAuthStateChanged(auth,currentUser=>{
             if(currentUser){
                 const userInfo= {email: currentUser?.email};
-                axiosPublic.post('/users',{email: currentUser?.email,userName:currentUser?.displayName})
+                axiosPublic.post('/users',{email: currentUser?.email,userName:currentUser?.displayName,userID: uuidv4(),
+                    createdAt: new Date().toISOString() })
                 .then((res)=>{
                     if(res.data.insertedId){
                         console.log('userCreated')

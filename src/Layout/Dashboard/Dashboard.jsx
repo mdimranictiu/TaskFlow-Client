@@ -107,9 +107,10 @@ const Dashboard = () => {
                     <p className="font-semibold">{user?.displayName || "User"}</p>
                     <p className="text-sm">{user?.email || "No Email"}</p>
                   </div>
-                  <button className="w-full cursor-pointer px-4 py-2 mb-2 text-left text-gray-300 hover:bg-gray-700">
+                 <Link to='/dashboard/my-profile'>
+                 <button className="w-full cursor-pointer px-4 py-2 mb-2 text-left text-gray-300 hover:bg-gray-700">
                     Profile
-                  </button>
+                  </button></Link>
                   <button
                     onClick={handleLogOut}
                     className="w-full cursor-pointer bg-red-500 mb-2 px-4 py-2 text-left text-white hover:bg-red-600"
