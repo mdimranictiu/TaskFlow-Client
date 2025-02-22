@@ -9,12 +9,12 @@ import Home from "../pages/Home";
 import MyProfile from "../pages/MyProfile";
 import MyTasks from "../pages/MyTasks";
 import Logs from "../pages/Logs";
-import TaskBoard from "../pages/TaskBoard";
-
+import ErrorPage from "../pages/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "my-tasks", 
-            element: <MyTasks></MyTasks>,
+            element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>,
           },
           {
             path: "add-task", 

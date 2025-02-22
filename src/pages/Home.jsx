@@ -165,9 +165,9 @@ const Home = () => {
                                                         <div className="flex items-center justify-between">
                                                             <h4 className="font-semibold">{task.title}</h4>
                                                             <div className="flex gap-4">
-                                                                <CgDetailsMore onClick={() => handleDetailsShow(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
-                                                                <FaRegEdit onClick={() => handleEdit(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
-                                                                <MdOutlineDelete onClick={() => handleDelete(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <CgDetailsMore onClick={() => handleDetailsShow(task?._id)} title='See Details' className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <FaRegEdit onClick={() => handleEdit(task?._id)} title={`Edit ${task?.title}`}className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <MdOutlineDelete onClick={() => handleDelete(task?._id)} title={`Delete ${task?.title}`} className="text-xl cursor-pointer hover:text-black transition" />
                                                             </div>
                                                         </div>
                                                     </li>
@@ -202,9 +202,9 @@ const Home = () => {
                                                         <div className="flex items-center justify-between">
                                                             <h4 className="font-semibold">{task.title}</h4>
                                                             <div className="flex gap-4">
-                                                                <CgDetailsMore onClick={() => handleDetailsShow(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
-                                                                <FaRegEdit onClick={() => handleEdit(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
-                                                                <MdOutlineDelete onClick={() => handleDelete(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <CgDetailsMore onClick={() => handleDetailsShow(task?._id)} title='See Details' className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <FaRegEdit onClick={() => handleEdit(task?._id)} title={`Edit ${task?.title}`} className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <MdOutlineDelete onClick={() => handleDelete(task?._id)} title={`Delete ${task?.title}`} className="text-xl cursor-pointer hover:text-black transition" />
                                                             </div>
                                                         </div>
                                                     </li>
@@ -239,9 +239,9 @@ const Home = () => {
                                                         <div className="flex items-center justify-between">
                                                             <h4 className="font-semibold">{task.title}</h4>
                                                             <div className="flex gap-4">
-                                                                <CgDetailsMore onClick={() => handleDetailsShow(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
-                                                                <FaRegEdit onClick={() => handleEdit(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
-                                                                <MdOutlineDelete onClick={() => handleDelete(task?._id)} className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <CgDetailsMore onClick={() => handleDetailsShow(task?._id)} title='See Details' className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <FaRegEdit onClick={() => handleEdit(task?._id)} title={`Edit ${task?.title}`} className="text-xl cursor-pointer hover:text-black transition" />
+                                                                <MdOutlineDelete onClick={() => handleDelete(task?._id)} title={`Delete ${task?.title}`} className="text-xl cursor-pointer hover:text-black transition" />
                                                             </div>
                                                         </div>
                                                     </li>
