@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext/AuthProvider';
 import UseAxiosSecure from '../hooks/UseAxiosSecure';
-import axios from 'axios';
 
 const Logs = () => {
     const {user}=useContext(AuthContext)
     const [logs,setLogs]=useState([])
     const [loading,setLoading]=useState(true)
     const axiosSecure=UseAxiosSecure();
+    document.title="Activity"
     useEffect(()=>{
         axiosSecure.get('/logs')
         .then((res)=>{
@@ -22,7 +22,7 @@ const Logs = () => {
     console.log(logs)
     return (
         <div className="w-full mx-auto min-h-screen shadow-2xl rounded-lg p-10 bg-white">
-        <h2 className="text-center text-3xl font-bold  mb-8">Monitor Your Activity</h2>
+        <h2 className="text-center text-3xl max-sm:text-2xl font-bold  mb-8">Monitor Your Activity</h2>
   
         <div className="py-5">
           {logs.length > 0 ? (
@@ -30,11 +30,8 @@ const Logs = () => {
               {logs.map((log, index) => (
                 <li
                   key={index}
-                  className="flex flex-col bg-[#34495e] text-white p-6 rounded-lg shadow-xl"
+                  className="flex max-sm:flex-col  text-[#8080A1] px-3 py-3 gap-3 rounded-lg shadow-xl"
                 >
-                  <p className="text-lg font-semibold">
-                    <strong>Action:</strong> {log.action}
-                  </p>
                   <p>
                     <strong>Task ID:</strong> {log.taskId}
                   </p>
@@ -42,7 +39,7 @@ const Logs = () => {
                     <strong>Details:</strong> {log.details}
                   </p>
                   <p>
-                    <strong>Timestamp:</strong> {new Date(log.timestamp).toLocaleString()}
+                    <strong>At</strong> {new Date(log.timestamp).toLocaleString()}
                   </p>
                 </li>
               ))}

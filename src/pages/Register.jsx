@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthContext/AuthProvider";
-
+import logo from '../assets/T.png'
 const Register = () => {
   const { createuser, signInWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Register = () => {
     formState: { errors },
     reset,
   } = useForm();
-
+document.title="Register"
   const onSubmit = (data) => {
     const { email, name, password, photoURL } = data;
     createuser(email, password)
@@ -55,7 +55,7 @@ const Register = () => {
       <div className="bg-white shadow-2xl rounded-lg w-full max-w-sm p-6">
         <div className="flex flex-col items-center">
           <img
-            src="https://taskify.taskhub.company/storage/logos/default_full_logo.png"
+            src={logo}
             alt="Logo"
             className="w-32 mb-4"
           />

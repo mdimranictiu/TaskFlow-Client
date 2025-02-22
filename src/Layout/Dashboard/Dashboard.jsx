@@ -5,13 +5,15 @@ import { AuthContext } from "../../AuthContext/AuthProvider";
 import { FaCirclePlus } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { BsListTask } from "react-icons/bs";
+import { MdHistory } from "react-icons/md";
+
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const dropdownRef = useRef(null);
-
+ document.title="Dashboard - TaskFlow"
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarOpen && !event.target.closest(".sidebar")) {
@@ -67,7 +69,7 @@ const Dashboard = () => {
             to="/dashboard/my-activity"
             className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700 transition"
           >
-            <BsListTask />
+            <MdHistory />
             My Activity
           </Link>
         </nav>
@@ -84,7 +86,7 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Navbar */}
-        <div className="bg-[#1E2939] text-white shadow-md p-4 flex justify-between px-24 items-center sticky top-0 z-40">
+        <div className="bg-[#1E2939] text-white shadow-md p-4 flex justify-between px-24 max-sm:px-6 items-center sticky top-0 z-40">
           {/* Sidebar Toggle Button (for mobile) */}
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -94,7 +96,8 @@ const Dashboard = () => {
           </button>
 
           {/* Title */}
-          <h2 className="text-xl font-semibold">TaskFlow</h2>
+         <Link to='/dashboard'><h2 className="text-3xl font-bold max-sm:-ml-[80px] max-sm:text-xl" style={{ fontFamily: "'Dancing Script', serif" }}>
+              TaskFlow</h2></Link>
 
           {/* Profile Section */}
           <div className="flex items-center gap-4">

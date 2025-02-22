@@ -15,7 +15,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [task, setTask] = useState({});
     const [fetch, setRefetch] = useState(false);
-
+    document.title="Dashboard"
     const [editedTask, setEditedTask] = useState({
         title: '',
         description: '',
@@ -128,7 +128,7 @@ const Home = () => {
     };
       
     return (
-        <div className='w-full mx-auto min-h-screen shadow-2xl rounded-lg p-10'>
+        <div className='w-full mx-auto min-h-screen shadow-2xl rounded-lg p-10 max-sm:p-2'>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className='grid grid-cols-3 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1'>
                     {/* To-Do Column */}

@@ -44,7 +44,7 @@ const MyTasks = () => {
 
   return (
     <div className='w-full mx-auto min-h-screen shadow-2xl rounded-lg p-10'>
-        <h2 className='text-center text-3xl max:sm:text-2xl font-bold'>Monitor Your Tasks: From To-Do to Done</h2>
+        <h2 className='text-center text-3xl max-sm:text-2xl font-bold'>Monitor Your Tasks: From To-Do to Done</h2>
         <div className='my-10'>
           <div className='grid text-center grid-cols-3 px-10 py-10 max-sm:px-2 max-sm:py-5 gap-5 max-md:grid-cols-2 max-sm:grid-cols-1'>
             {/* My Tasks */}

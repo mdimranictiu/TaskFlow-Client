@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import logo from '../assets/T.png'
 
 const Login = () => {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
@@ -55,7 +56,7 @@ const Login = () => {
         {/* Logo and Welcome Message */}
         <div className="flex flex-col items-center">
           <img
-            src="https://taskify.taskhub.company/storage/logos/default_full_logo.png"
+            src={logo}
             alt="Logo"
             className="w-32 mb-4"
           />

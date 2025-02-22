@@ -7,6 +7,7 @@ import { AuthContext } from '../AuthContext/AuthProvider';
 const AddTask = () => {
     const {user}=useContext(AuthContext)
     const [loading,setLoading]=useState(false)
+    document.title="Add A Task"
   const {
     register,
     handleSubmit,
@@ -58,7 +59,7 @@ const AddTask = () => {
   return (
     <div className="flex justify-center min-h-screen bg-gray-100">
       <div className="shadow-2xl bg-white rounded-lg w-full max-w-5xl p-10">
-        <h2 className="text-center py-5 text-3xl font-bold">Add A Task</h2>
+        <h2 className="text-center py-5 text-3xl max-sm:text-2xl font-bold">Add A Task</h2>
         <div className="max-w-lg mx-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Title Input */}
