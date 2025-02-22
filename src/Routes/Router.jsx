@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import MyProfile from "../pages/MyProfile";
 import MyTasks from "../pages/MyTasks";
 import Logs from "../pages/Logs";
+import TaskBoard from "../pages/TaskBoard";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
           {
             path: 'my-activity',
             element: <PrivateRoute><Logs></Logs></PrivateRoute>
+          },
+          {
+            path: 'task-board',
+            element: <PrivateRoute><TaskBoard></TaskBoard></PrivateRoute>
           }
         ],
       },

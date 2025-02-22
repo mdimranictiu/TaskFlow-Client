@@ -92,40 +92,53 @@ const Home = () => {
     };
 
     const onDragEnd = (result) => {
-        if (!result.destination) return; // Ignore if dropped outside a valid drop target
+        if (!result.destination) return; // If there's no destination, exit the function.
     
         const { source, destination, draggableId } = result;
     
-        if (source.index === destination.index && source.droppableId === destination.droppableId) {
-            return; // No movement
-        }
+        // If the dragged item is dropped in the same position and category, do nothing
+        if (source.index === destination.index && source.droppableId === destination.droppableId) return;
     
-        // Find the dragged task safely
+        // Get the dragged task by its ID
         const draggedTask = tasks.find((task) => task._id === draggableId);
-        if (!draggedTask) return; // Ensure draggedTask exists before proceeding
+        if (!draggedTask) return; // Exit if no task found.
     
-        // Remove the dragged task from the original list
-        let updatedTasks = tasks.filter((task) => task._id !== draggableId);
+        // Clone the current tasks to ensure we are not directly modifying the state
+        const updatedTasks = [...tasks];
     
-        // Update the category if moved to a different droppable
-        if (source.droppableId !== destination.droppableId) {
-            draggedTask.category = destination.droppableId.replace('Droppable', '');
-        }
+        // Update the task's category if it’s moved across lists
+        draggedTask.category = destination.droppableId;
     
-        // Insert the dragged task at the new index
-        updatedTasks.splice(destination.index, 0, draggedTask);
+        // Remove the task from its original position
+        const filteredTasks = updatedTasks.filter(task => task._id !== draggableId);
     
-        // Update state with the new task order
-        setTasks([...updatedTasks]);
+        // Insert the task at the new position in the destination category
+        filteredTasks.splice(destination.index, 0, draggedTask);
+    
+        // Reorder tasks if needed, based on the category and index
+        const reorderedTasks = reorder(filteredTasks, source.index, destination.index);
+    
+        setTasks(reorderedTasks); // Update the state with the new tasks array
+    
+        // Send the updated category information to the backend
+        axiosSecure.patch(`/task/update/${draggedTask._id}`, { category: draggedTask.category })
+            .catch(error => console.error('Error updating task:', error.message));
     };
     
     // Helper function to reorder tasks within the same category
     const reorder = (tasks, startIndex, endIndex) => {
+        if (startIndex === endIndex) return tasks; // No need to reorder
+        if (startIndex < 0 || endIndex < 0 || startIndex >= tasks.length || endIndex >= tasks.length) {
+            console.error("Invalid indices");
+            return tasks;
+        }
+    
         const result = [...tasks];
         const [movedTask] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, movedTask);
         return result;
     };
+    
       
     return (
         <div className='w-full mx-auto min-h-screen shadow-2xl rounded-lg p-10 max-sm:p-2'>
@@ -135,20 +148,20 @@ const Home = () => {
                     <div className="bg-[#426DC6] min-h-96 p-6 rounded-lg shadow-lg">
                         <h3 className="text-center font-bold text-xl text-white uppercase tracking-wide">To Do</h3>
                         <div className="border-t-2 border-white/50 my-3"></div>
-                        <Droppable droppableId="todoDroppable">
+                        <Droppable droppableId="To-Do" className="py-10">
                             {(provided) => (
                                 <ul className="space-y-4" ref={provided.innerRef} {...provided.droppableProps}>
                                     {todoTasks.length === 0 ? (
-                                        <p className="text-white text-center">No tasks available</p>
+                                        <p className="text-white text-center">{loading? "Loading..." : "No tasks available"}</p>
                                     ) : (
                                         todoTasks.map((task, index) => (
-                                            <Draggable key={task._id} draggableId={task._id} index={index}>
+                                            <Draggable key={String(task._id)} draggableId={String(task._id)} index={index}>
                                                 {(provided) => (
                                                     <li
                                                         ref={provided.innerRef}
                                                         {...provided.draggableProps}
                                                         {...provided.dragHandleProps}
-                                                        className="hover:bg-white px-5 py-4 text-lg text-white rounded-lg shadow-lg hover:text-black cursor-pointer bg-[black] transition duration-500">
+                                                        className="hover:bg-white px-5 bg-black py-4  text-lg text-white rounded-lg shadow-lg hover:text-black cursor-pointer  transition duration-500">
                                                         <div className="flex items-center justify-between">
                                                             <h4 className="font-semibold">{task.title}</h4>
                                                             <div className="flex gap-4">
@@ -172,14 +185,14 @@ const Home = () => {
                     <div className="bg-[#426DC6] min-h-96 p-6 rounded-lg shadow-lg">
                         <h3 className="text-center font-bold text-xl text-white uppercase tracking-wide">In Progress</h3>
                         <div className="border-t-2 border-white/50 my-3"></div>
-                        <Droppable droppableId="inProgressDroppable">
+                        <Droppable droppableId="In Progress" className="py-10">
                             {(provided) => (
                                 <ul className="space-y-4" ref={provided.innerRef} {...provided.droppableProps}>
                                     {inProgressTasks.length === 0 ? (
-                                        <p className="text-white text-center">No tasks available</p>
+                                        <p className="text-white text-center">{loading? "Loading..." : "No tasks available"}</p>
                                     ) : (
                                         inProgressTasks.map((task, index) => (
-                                            <Draggable key={task._id} draggableId={task._id} index={index}>
+                                            <Draggable key={String(task._id)} draggableId={String(task._id)} index={index}>
                                                 {(provided) => (
                                                     <li
                                                         ref={provided.innerRef}
@@ -209,14 +222,14 @@ const Home = () => {
                     <div className="bg-[#426DC6] min-h-96 p-6 rounded-lg shadow-lg">
                         <h3 className="text-center font-bold text-xl text-white uppercase tracking-wide">Done</h3>
                         <div className="border-t-2 border-white/50 my-3"></div>
-                        <Droppable droppableId="Done">
+                        <Droppable droppableId="Done" className="py-10">
                             {(provided) => (
                                 <ul className="space-y-4" ref={provided.innerRef} {...provided.droppableProps}>
                                     {doneTasks.length === 0 ? (
-                                        <p className="text-white text-center">No tasks available</p>
+                                        <p className="text-white text-center">{loading? "Loading..." : "No tasks available"}</p>
                                     ) : (
                                         doneTasks.map((task, index) => (
-                                            <Draggable key={task._id} draggableId={task._id} index={index}>
+                                            <Draggable key={String(task._id)} draggableId={String(task._id)} index={index}>
                                                 {(provided) => (
                                                     <li
                                                         ref={provided.innerRef}

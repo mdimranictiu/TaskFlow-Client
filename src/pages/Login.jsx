@@ -76,7 +76,7 @@ const Login = () => {
               type="email"
               {...register("email", { required: "Email is required" })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0C65E3] focus:outline-none"
-              placeholder="Enter your email"
+              placeholder="Enter your email" defaultValue={"imran1@imran.com"}
             />
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -88,7 +88,7 @@ const Login = () => {
               Password
             </label>
             <input
-              type="password"
+              type="password" defaultValue={"Imran123"}
               {...register("password", {
                 required: "Password is required",
                 minLength: {

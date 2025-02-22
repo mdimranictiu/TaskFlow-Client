@@ -45,7 +45,7 @@ const Logs = () => {
               ))}
             </ul>
           ) : (
-            <p className="text-center text-lg font-semibold text-gray-600">No logs found.</p>
+            <p className="text-center text-lg font-semibold text-gray-600">{loading? "Loading..." : "No Logs Found"}</p>
           )}
         </div>
       </div>
