@@ -5,7 +5,7 @@ import { AuthContext } from '../AuthContext/AuthProvider';
 import UseAxiosSecure from '../hooks/UseAxiosSecure';
 import { IoMdClose } from "react-icons/io";
 import { CgDetailsMore } from "react-icons/cg";
-    import { DragDropContext,Droppable, Draggable } from '@hello-pangea/dnd';
+import { DragDropContext,Droppable, Draggable } from '@hello-pangea/dnd';
 
 const Home = () => {
     const { user } = useContext(AuthContext);
