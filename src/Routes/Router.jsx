@@ -48,10 +48,6 @@ export const router = createBrowserRouter([
             path: 'my-activity',
             element: <PrivateRoute><Logs></Logs></PrivateRoute>
           },
-          {
-            path: 'task-board',
-            element: <PrivateRoute><TaskBoard></TaskBoard></PrivateRoute>
-          }
         ],
       },
     ],
